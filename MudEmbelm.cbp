@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="MudEmbelm" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/MudEmbelm" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="D:/Coding/libs/SDL2_VC/include" />
+					<Add directory="D:/Coding/libs/RapidXML/include" />
+				</Compiler>
+				<Linker>
+					<Add library="D:/Coding/libs/SDL2_VC/lib/x86/SDL2.lib" />
+					<Add library="D:/Coding/libs/SDL2_VC/lib/x86/SDL2main.lib" />
+					<Add library="D:/Coding/libs/SDL2_VC/lib/x86/SDL2test.lib" />
+					<Add library="D:/Coding/libs/SDL2_VC/Extensions/SDL2_image-2.0.1/lib/x86/SDL2_image.lib" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/MudEmbelm" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="eventhandler.cpp" />
+		<Unit filename="eventhandler.h" />
+		<Unit filename="game.h" />
+		<Unit filename="gamesystem.cpp" />
+		<Unit filename="gamesystem.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="map.cpp" />
+		<Unit filename="map.h" />
+		<Unit filename="xmlparse.cpp" />
+		<Unit filename="xmlparse.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
