@@ -84,7 +84,7 @@ void Map::updateCamera(){
 		camera.top = new_top;
 		camera.bottom = new_bottom;
 	}else{
-		//do not update camera.left
+		//do not update camera
 	}
 }
 
@@ -93,30 +93,31 @@ void Map::render(SDL_Renderer* renderer) const{
 	SDL_Rect dest = {0, 0, 0, 0};
 	for(int i=0; i<tilemap.height; ++i){
 		for(int j=0; j<tilemap.width; ++j){
-			for(std::vector<int**>::const_iterator grid=mapping.begin(); grid!=mapping.end(); ++grid){
-				if((*grid)[i][j]>0 && isInFrame(i, j)){
-					//draw in this grid with appropriate ID
-					drawGrid(renderer, i, j, (*grid)[i][j], src, dest);
-				}else;
+			if(isInFrame(i, j)){
+				for(std::vector<int**>::const_iterator grid=mapping.begin(); grid!=mapping.end(); ++grid){
+					if((*grid)[i][j]>0){
+						//draw in this grid with appropriate ID
+						drawGrid(renderer, i, j, (*grid)[i][j], src, dest);
+					}else;
+				}
+			}else{
+				//since this grid is not in camera, skip its rendering to improve performance
 			}
 		}
 	}
 }
 
+/*test if this grid is visible from camera*/
 bool Map::isInFrame(int row_num, int col_num) const{
-	bool result = false;
+
 	float cam_left = floor((float)tilemap.width * camera.left);
 	float cam_right = floor((float)tilemap.width * camera.right);
 	float cam_top = floor((float)tilemap.height * camera.top);
 	float cam_bottom = floor((float)tilemap.height * camera.bottom);
-	if( (cam_left<=col_num && col_num<=cam_right) && (cam_top<=row_num && row_num<=cam_bottom) ){
-		result = true;
-	}else{
-		//tile is not in frame
-	}
-	return result;
-}
 
+	//if this grid tested to be visible(fully or partially), return true
+	return((cam_left<=col_num && col_num<=cam_right) && (cam_top<=row_num && row_num<=cam_bottom));
+}
 
 
 void Map::drawGrid(SDL_Renderer* renderer, int i, int j, int tileID, SDL_Rect& src, SDL_Rect& dest) const{
@@ -135,14 +136,12 @@ void Map::drawGrid(SDL_Renderer* renderer, int i, int j, int tileID, SDL_Rect& s
 			src.h = tileset->height / tileset->row_count;
 			break;
 		}else{
-			//keep iterating
+			//keep iterating until correct tileset is found
 		}
 	}
 	if(tex==nullptr){
-		throw std::runtime_error("ERROR: could not load fetch texture from tilesets");
-	}else{
-		//continue
-	}
+		throw std::runtime_error("ERROR: could not fetch texture from tilesets");
+	}else;
 
 	//update dest rectangle
 	float screen_pos_y = (i * tilemap.tile_height - camera.left) / (camera.right - camera.left); 

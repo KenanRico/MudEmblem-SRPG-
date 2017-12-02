@@ -57,11 +57,11 @@ float GameSystem::floatingY(float pos){
 }
 
 int GameSystem::integerX(float pos){
-	return pos * (float)window_width; //round up
+	return pos * (float)window_width;
 }
 
 int GameSystem::integerY(float pos){
-	return pos * (float)window_height; //round up
+	return pos * (float)window_height;
 }
 
 int GameSystem::checkerBoardSize(){
