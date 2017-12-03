@@ -32,13 +32,19 @@ class Map{
 			float top;
 			float bottom;
 		};
-
+		
+		struct Grid{
+			int row_index;
+			int column_index;
+			SDL_Rect rectangle;
+		};
 
 	private:
 		Tilemap tilemap;
 		std::vector<Tileset> tilesets; 
 		std::vector<int**> mapping;
 		Camera camera;
+		mutable std::vector<struct Grid> grids;
 
 	public:
 		Map(SDL_Renderer*, const char*);
@@ -51,12 +57,11 @@ class Map{
 	public:
 		void update();
 		void render(SDL_Renderer*) const;
+		const std::vector<struct Grid>& getRenderedGrids() const;
 	private:
 		void updateCamera();
 		bool isInFrame(int, int) const;
 		void drawGrid(SDL_Renderer*, int, int, int, SDL_Rect&, SDL_Rect&) const;
-
-	//friend class RenderEngine::renderMap(const Map&);
 };
 
 #endif

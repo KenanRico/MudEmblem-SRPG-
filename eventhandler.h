@@ -9,10 +9,10 @@ class EventHandler{
 	private:
 		static SDL_Event event;
 		static struct Mouse{
-			bool click[2];
-			bool press[2];
+			bool click[3];
+			bool press[3];
 			int scroll[2];
-			float click_position[2][2];
+			float click_position[3][2];
 			float current_position[2];
 		} mouse;
 		static bool close;

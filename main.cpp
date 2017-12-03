@@ -1,7 +1,7 @@
 #include "gamesystem.h"
 #include "game.h"
 #include "eventhandler.h"
-#include "map.h"
+#include "entities.h"
 
 #include <stdexcept>
 #include <iostream>
@@ -15,7 +15,7 @@
 
 SDL_Window* window = nullptr;
 SDL_Renderer* renderer = nullptr;
-Map* map = nullptr;
+Entities* entities = nullptr;
 
 void InitSystem();
 void InitGame();
@@ -62,7 +62,8 @@ void InitSystem(){
 void InitGame(){
 	GameSystem::init();
 	EventHandler::init();
-	map = new Map(renderer, "maps/map1/map1.tmx");
+	entities = new Entities(renderer);
+	entities->addMap(renderer, "maps/map1/map1.tmx");
 }
 
 void GameLoop(){
@@ -75,19 +76,19 @@ void GameLoop(){
 void updateGame(){
 	GameSystem::update(window);
 	EventHandler::update();
-	map->update();
+	entities->update();
 }
 
 void renderGame(){
 	SDL_RenderClear(renderer);
 
-	map->render(renderer);
+	entities->render(renderer);
 
 	SDL_RenderPresent(renderer);
 }
 
 void DestroyGame(){
-	delete map;
+	//nothing yet
 }
 
 void DestroySystem(){

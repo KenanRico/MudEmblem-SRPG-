@@ -1,5 +1,4 @@
 #include "map.h"
-#include "renderengine.h"
 #include "xmlparse.h"
 #include "gamesystem.h"
 #include "eventhandler.h"
@@ -89,17 +88,26 @@ void Map::updateCamera(){
 }
 
 void Map::render(SDL_Renderer* renderer) const{
+	//clear currently-renderer grids vector
+	grids.clear();
+
+	//init render rectangles	
 	SDL_Rect src = {0, 0, 0, 0};
 	SDL_Rect dest = {0, 0, 0, 0};
+
+	//render grids
 	for(int i=0; i<tilemap.height; ++i){
 		for(int j=0; j<tilemap.width; ++j){
 			if(isInFrame(i, j)){
+				//render all layers on this grid
 				for(std::vector<int**>::const_iterator grid=mapping.begin(); grid!=mapping.end(); ++grid){
 					if((*grid)[i][j]>0){
 						//draw in this grid with appropriate ID
 						drawGrid(renderer, i, j, (*grid)[i][j], src, dest);
 					}else;
 				}
+				//push currently-renderer grid into vector
+				grids.push_back((struct Grid){i, j, dest});
 			}else{
 				//since this grid is not in camera, skip its rendering to improve performance
 			}
@@ -153,4 +161,8 @@ void Map::drawGrid(SDL_Renderer* renderer, int i, int j, int tileID, SDL_Rect& s
 	
 	//render
 	SDL_RenderCopy(renderer, tex, &src, &dest);
+}
+
+const std::vector<struct Map::Grid>& Map::getRenderedGrids() const{
+	return grids;
 }

@@ -1,10 +1,11 @@
 # depslib dependency file v1.0
-1512214937 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\eventhandler.cpp
+1512268410 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\eventhandler.cpp
 	"eventhandler.h"
 	"game.h"
+	<iostream>
 	<SDL2/SDL.h>
 
-1512213534 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\eventhandler.h
+1512268305 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\eventhandler.h
 	<SDL2/SDL.h>
 
 1476881990 d:\coding\libs\sdl2_vc\include\sdl2\sdl.h
@@ -326,9 +327,9 @@
 	"begin_code.h"
 	"close_code.h"
 
-1511748666 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\game.h
+1512268218 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\game.h
 
-1512212392 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\gamesystem.cpp
+1512218800 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\gamesystem.cpp
 	"gamesystem.h"
 	"game.h"
 	"eventhandler.h"
@@ -337,21 +338,21 @@
 1511748580 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\gamesystem.h
 	<SDL2/SDL.h>
 
-1511932425 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\main.cpp
+1512266101 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\main.cpp
 	"gamesystem.h"
 	"game.h"
 	"eventhandler.h"
-	"map.h"
+	"entities.h"
 	<stdexcept>
 	<iostream>
 	<SDL2/SDL.h>
 
-1512214644 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\map.h
+1512268585 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\map.h
 	<vector>
 	<string>
 	<SDL2/SDL.h>
 
-1512216528 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\map.cpp
+1512264055 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\map.cpp
 	"map.h"
 	"renderengine.h"
 	"xmlparse.h"
@@ -397,4 +398,20 @@
 	<cassert>
 	<new>
 	<exception>
+
+1512265360 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\entities.h
+	"map.h"
+	<vector>
+	<SDL2/SDL.h>
+
+1512268550 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\entities.cpp
+	"entities.h"
+	"map.h"
+	"eventhandler.h"
+	"game.h"
+	<vector>
+	<iostream>
+	<stdexcept>
+	<SDL2/SDL.h>
+	<SDL2/extensions/SDL_image.h>
 

@@ -11,7 +11,7 @@ namespace Game{
 	class Event{
 		public:
 			enum POSITION{ X=0, Y=1 };
-			enum BUTTON{ LEFT=0, RIGHT=1 };
+			enum BUTTON{ LEFT=0, MIDDLE=1, RIGHT=2 };
 	};
 
 

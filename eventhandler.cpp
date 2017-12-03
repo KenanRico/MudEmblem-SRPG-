@@ -1,12 +1,14 @@
 #include "eventhandler.h"
 #include "game.h"
 
+#include <iostream>
+
 #include <SDL2/SDL.h>
 
 
 struct EventHandler::Mouse EventHandler::mouse = (EventHandler::Mouse){
-	{false, false}, {false, false}, {0, 0},
-	{{0.0f,0.0f}, {0.0f, 0.0f}}, {0.0f, 0.0f}
+	{false, false, false}, {false, false, false}, {0, 0},
+	{{0.0f,0.0f}, {0.0f, 0.0f}, {0.0f, 0.0f}}, {0.0f, 0.0f}
 };
 SDL_Event EventHandler::event;
 bool EventHandler::close = false;
@@ -18,6 +20,7 @@ void EventHandler::init(){
 
 void EventHandler::update(){
 	mouse.click[Game::Event::LEFT] = false;
+	mouse.click[Game::Event::MIDDLE] = false;
 	mouse.click[Game::Event::RIGHT] = false;
 	mouse.scroll[Game::Event::X] = 0;
 	mouse.scroll[Game::Event::Y] = 0;
