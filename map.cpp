@@ -138,12 +138,12 @@ void Map::drawGrid(SDL_Renderer* renderer, int i, int j, int tileID, SDL_Rect& s
 
 	//update dest rectangle
 	const struct Camera::Position& cam = camera.getPosition();
-	float screen_pos_y = (i * tilemap.tile_height - cam.top) / (cam.right - cam.left);
-	float screen_pos_x = (j * tilemap.tile_width - cam.left) / (cam.bottom - cam.top);
+	float screen_pos_y = (i * tilemap.tile_height - cam.top) / cam.width;
+	float screen_pos_x = (j * tilemap.tile_width - cam.left) / cam.height;
 	dest.x = ceil(GameSystem::integerX(screen_pos_x));
 	dest.y = ceil(GameSystem::integerY(screen_pos_y));
-	dest.w = ceil((GameSystem::integerX(tilemap.tile_width)+1) / (cam.right - cam.left));
-	dest.h = ceil((GameSystem::integerY(tilemap.tile_height)+1) / (cam.bottom - cam.top));
+	dest.w = ceil((GameSystem::integerX(tilemap.tile_width)+1) / cam.width);
+	dest.h = ceil((GameSystem::integerY(tilemap.tile_height)+1) / cam.height);
 
 	//render
 	SDL_RenderCopy(renderer, tex, &src, &dest);

@@ -11,11 +11,14 @@ class Camera{
 			float right;
 			float top;
 			float bottom;
+			float width;
+			float height;
 		};
 	private:
 		struct Action{
 			bool drag;
 			bool zoom;
+			bool slide;
 		};
 
 	private:
@@ -35,8 +38,8 @@ class Camera{
 		void update();
 		const struct Position& getPosition() const;
 	private:
-		void updateActions();
-		void handleActions(struct Position&);
+		void updateActions(float, float);
+		void handleActions(struct Position&, float, float, float, float);
 		void updateView(const struct Position&);
 };
 

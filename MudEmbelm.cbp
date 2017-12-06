@@ -40,6 +40,10 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="camera.cpp" />
+		<Unit filename="camera.h" />
+		<Unit filename="cursor.cpp" />
+		<Unit filename="cursor.h" />
 		<Unit filename="entities.cpp" />
 		<Unit filename="entities.h" />
 		<Unit filename="eventhandler.cpp" />

@@ -338,7 +338,7 @@
 1511748580 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\gamesystem.h
 	<SDL2/SDL.h>
 
-1512528432 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\main.cpp
+1512540003 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\main.cpp
 	"gamesystem.h"
 	"game.h"
 	"eventhandler.h"
@@ -354,7 +354,7 @@
 	<string>
 	<SDL2/SDL.h>
 
-1512521222 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\map.cpp
+1512539247 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\map.cpp
 	"map.h"
 	"xmlparse.h"
 	"gamesystem.h"
@@ -417,13 +417,14 @@
 	<SDL2/SDL.h>
 	<SDL2/extensions/SDL_image.h>
 
-1512525381 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\camera.h
+1512539028 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\camera.h
 
-1512525663 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\camera.cpp
+1512539460 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\camera.cpp
 	"camera.h"
 	"eventhandler.h"
 	"gamesystem.h"
 	"game.h"
+	<iostream>
 
 1512528084 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\cursor.h
 	<SDL2/SDL.h>

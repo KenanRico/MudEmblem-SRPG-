@@ -60,6 +60,8 @@ void InitSystem(){
 	}
 	//hide default cursor
 	SDL_ShowCursor(0);
+	//trap cursor
+	//SDL_SetRelativeMouseMode(SDL_TRUE);
 }
 
 void InitGame(){
