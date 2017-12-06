@@ -40,6 +40,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="entities.cpp" />
+		<Unit filename="entities.h" />
 		<Unit filename="eventhandler.cpp" />
 		<Unit filename="eventhandler.h" />
 		<Unit filename="game.h" />

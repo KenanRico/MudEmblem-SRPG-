@@ -3,6 +3,7 @@
 #include "gamesystem.h"
 #include "eventhandler.h"
 #include "game.h"
+#include "camera.h"
 
 #include <vector>
 #include <cstring>
@@ -15,14 +16,12 @@
 
 
 
-Map::Map(SDL_Renderer* renderer, const char* tilemap_src): tilemap((struct Tilemap){0, 0, 0.0f, 0.0f}), camera((struct Camera){0.0f, 0.0f, 0.0f, 0.0f}){
-
-	///set camera to some portion of the tilemap
-	camera = (struct Camera){0.4f, 0.6f, 0.4f, 0.6f};
-
+Map::Map(SDL_Renderer* renderer, const char* tilemap_src): 
+tilemap((struct Tilemap){0, 0, 0.0f, 0.0f}), 
+camera(0.2f, 0.4f, 0.4f, 0.6f){
 	///parse tilemap into tilesets and mapping
 	XMLParse::parseToTilemap(tilemap_src, tilemap, tilesets, mapping);
-	//load tilesets' textures 
+	//load tilesets' textures
 	std::string path(tilemap_src);
 	path = path.substr(0, path.find_last_of('/'));
 	for(std::vector<struct Tileset>::iterator iter=tilesets.begin(); iter!=tilesets.end(); ++iter){
@@ -66,39 +65,22 @@ Map::~Map(){
 }
 
 void Map::update(){
-	updateCamera();
+	camera.update();
 }
 
-void Map::updateCamera(){
-	//zoom in/out (temporary functionality)
-	float new_left = camera.left + EventHandler::getScroll(Game::Event::Y) * 0.005f;
-	float new_right = camera.right - EventHandler::getScroll(Game::Event::Y) * 0.005f;
-	float new_top = camera.top + EventHandler::getScroll(Game::Event::Y) * 0.005f;
-	float new_bottom = camera.bottom - EventHandler::getScroll(Game::Event::Y) * 0.005f;
-
-	//make sure camera is not zoomed too close/far (0.0 <= left < right <= 1.0 and 0.0 <= top < bottom <= 1.0)
-	if(0.0f<=new_left && new_left<new_right && new_right<=1.0f && 0.0f<=new_top && new_top<new_bottom && new_bottom<=1.0f){
-		camera.left = new_left;
-		camera.right = new_right;
-		camera.top = new_top;
-		camera.bottom = new_bottom;
-	}else{
-		//do not update camera
-	}
-}
 
 void Map::render(SDL_Renderer* renderer) const{
 	//clear currently-renderer grids vector
 	grids.clear();
 
-	//init render rectangles	
+	//init render rectangles
 	SDL_Rect src = {0, 0, 0, 0};
 	SDL_Rect dest = {0, 0, 0, 0};
 
 	//render grids
 	for(int i=0; i<tilemap.height; ++i){
 		for(int j=0; j<tilemap.width; ++j){
-			if(isInFrame(i, j)){
+			if(isInFrame(i,j)){
 				//render all layers on this grid
 				for(std::vector<int**>::const_iterator grid=mapping.begin(); grid!=mapping.end(); ++grid){
 					if((*grid)[i][j]>0){
@@ -106,7 +88,7 @@ void Map::render(SDL_Renderer* renderer) const{
 						drawGrid(renderer, i, j, (*grid)[i][j], src, dest);
 					}else;
 				}
-				//push currently-renderer grid into vector
+				//push currently-rendered grid into vector
 				grids.push_back((struct Grid){i, j, dest});
 			}else{
 				//since this grid is not in camera, skip its rendering to improve performance
@@ -118,13 +100,16 @@ void Map::render(SDL_Renderer* renderer) const{
 /*test if this grid is visible from camera*/
 bool Map::isInFrame(int row_num, int col_num) const{
 
-	float cam_left = floor((float)tilemap.width * camera.left);
-	float cam_right = floor((float)tilemap.width * camera.right);
-	float cam_top = floor((float)tilemap.height * camera.top);
-	float cam_bottom = floor((float)tilemap.height * camera.bottom);
+	const struct Camera::Position& cam = camera.getPosition();
+	float cam_left = floor((float)tilemap.width * cam.left);
+	float cam_right = floor((float)tilemap.width * cam.right);
+	float cam_top = floor((float)tilemap.height * cam.top);
+	float cam_bottom = floor((float)tilemap.height * cam.bottom);
+	
+	//std::cout<<cam_left<<" "<<cam_right<<" "<<cam_top<<" "<<cam_bottom<<"\n";
 
 	//if this grid tested to be visible(fully or partially), return true
-	return((cam_left<=col_num && col_num<=cam_right) && (cam_top<=row_num && row_num<=cam_bottom));
+	return ((cam_left<=col_num && col_num<=cam_right) && (cam_top<=row_num && row_num<=cam_bottom));
 }
 
 
@@ -152,13 +137,14 @@ void Map::drawGrid(SDL_Renderer* renderer, int i, int j, int tileID, SDL_Rect& s
 	}else;
 
 	//update dest rectangle
-	float screen_pos_y = (i * tilemap.tile_height - camera.left) / (camera.right - camera.left); 
-	float screen_pos_x = (j * tilemap.tile_width - camera.top) / (camera.bottom - camera.top);
+	const struct Camera::Position& cam = camera.getPosition();
+	float screen_pos_y = (i * tilemap.tile_height - cam.top) / (cam.right - cam.left);
+	float screen_pos_x = (j * tilemap.tile_width - cam.left) / (cam.bottom - cam.top);
 	dest.x = ceil(GameSystem::integerX(screen_pos_x));
 	dest.y = ceil(GameSystem::integerY(screen_pos_y));
-	dest.w = ceil((GameSystem::integerX(tilemap.tile_width)+1) / (camera.right - camera.left));
-	dest.h = ceil((GameSystem::integerY(tilemap.tile_height)+1) / (camera.bottom - camera.top));
-	
+	dest.w = ceil((GameSystem::integerX(tilemap.tile_width)+1) / (cam.right - cam.left));
+	dest.h = ceil((GameSystem::integerY(tilemap.tile_height)+1) / (cam.bottom - cam.top));
+
 	//render
 	SDL_RenderCopy(renderer, tex, &src, &dest);
 }

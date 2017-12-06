@@ -1,3 +1,4 @@
+#include "camera.h"
 
 #include <vector>
 #include <string>
@@ -26,12 +27,6 @@ class Map{
 			int height;
 			SDL_Texture* texture;
 		};
-		struct Camera{
-			float left;
-			float right;
-			float top;
-			float bottom;
-		};
 		
 		struct Grid{
 			int row_index;
@@ -40,10 +35,13 @@ class Map{
 		};
 
 	private:
+		//tiles related attributes/data
 		Tilemap tilemap;
 		std::vector<Tileset> tilesets; 
 		std::vector<int**> mapping;
+		//camera
 		Camera camera;
+		//individual grids
 		mutable std::vector<struct Grid> grids;
 
 	public:
@@ -59,7 +57,6 @@ class Map{
 		void render(SDL_Renderer*) const;
 		const std::vector<struct Grid>& getRenderedGrids() const;
 	private:
-		void updateCamera();
 		bool isInFrame(int, int) const;
 		void drawGrid(SDL_Renderer*, int, int, int, SDL_Rect&, SDL_Rect&) const;
 };

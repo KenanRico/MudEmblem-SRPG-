@@ -13,7 +13,8 @@ class EventHandler{
 			bool press[3];
 			int scroll[2];
 			float click_position[3][2];
-			float current_position[2];
+			float this_cycle_position[2];
+			float last_cycle_position[2];
 		} mouse;
 		static bool close;
 	private:
@@ -28,7 +29,8 @@ class EventHandler{
 		static bool getPress(int);
 		static int getScroll(int);
 		static float getClickPosition(int, int);
-		static float getCurrentPosition(int);
+		static float getThisCyclePosition(int);
+		static float getLastCyclePosition(int);
 		static bool  closeWindow();
 };
 

@@ -16,18 +16,18 @@ Entities::Entities(SDL_Renderer* renderer):
 current_map(maps.begin()), 
 selecting_grid(false), grid_src((SDL_Rect){0, 0, 0, 0}), grid_box((SDL_Rect){0, 0, 0, 0}), grid_texture(nullptr){
 	//load grid box texture
-	SDL_Surface* temp = IMG_Load("assets/grid2.png");
+	SDL_Surface* temp = IMG_Load("assets/grid1.png");
 	if(temp!=nullptr){
 		grid_texture = SDL_CreateTextureFromSurface(renderer, temp);
 		SDL_FreeSurface(temp);
+		//config grid src rectangle
+		if(grid_texture!=nullptr){
+			SDL_QueryTexture(grid_texture, 0, 0, &grid_src.w, &grid_src.h);
+		}else{
+			throw std::runtime_error("ERROR: Failed to find grid box texture");
+		}
 	}else{
 		throw std::runtime_error("ERROR: Failed to load grid box texture");
-	}
-	//config grid src rectangle
-	if(grid_texture!=nullptr){
-		SDL_QueryTexture(grid_texture, 0, 0, &grid_src.w, &grid_src.h);
-	}else{
-		throw std::runtime_error("ERROR: Failed to find grid box texture");
 	}
 }
 
@@ -47,26 +47,28 @@ void Entities::addMap(SDL_Renderer* renderer, const char* map_source){
 }
 
 void Entities::update(){
-	//update map
+	///update map
 	(*current_map)->update();
 
-	//update grid_box
-	if(EventHandler::getPress(Game::Event::LEFT)){
-		selecting_grid = true;
+	///enable/disable grid selecting (click XOR selecting_grid)
+	selecting_grid = (EventHandler::getClick(Game::Event::RIGHT) != selecting_grid);
+
+	///update grid_box if grid selecting enabled
+	if(selecting_grid){
 		const std::vector<struct Map::Grid>& grids = (*current_map)->getRenderedGrids();
-		int mouse_x = EventHandler::getCurrentPosition(Game::Event::X);
-		int mouse_y = EventHandler::getCurrentPosition(Game::Event::Y);
+		int mouse_x = EventHandler::getThisCyclePosition(Game::Event::X);
+		int mouse_y = EventHandler::getThisCyclePosition(Game::Event::Y);
 		for(std::vector<struct Map::Grid>::const_iterator iter=grids.begin(); iter!=grids.end(); ++iter){
-			const struct Map::Grid& grid = *iter;
-			if(grid.rectangle.x<=mouse_x && mouse_x<=grid.rectangle.x+grid.rectangle.w && grid.rectangle.y<=mouse_y && mouse_y<=grid.rectangle.y+grid.rectangle.h){
-				grid_box = grid.rectangle;
+			const SDL_Rect& box = iter->rectangle;
+			if(box.x<=mouse_x && mouse_x<=box.x+box.w && box.y<=mouse_y && mouse_y<=box.y+box.h){
+				grid_box = box;
 				break;
 			}else{
 				//keep iterating
 			}
 		}
 	}else{
-		selecting_grid = false;
+		//grid selecting disabled
 	}
 }
 

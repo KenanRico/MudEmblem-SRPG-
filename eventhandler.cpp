@@ -8,7 +8,7 @@
 
 struct EventHandler::Mouse EventHandler::mouse = (EventHandler::Mouse){
 	{false, false, false}, {false, false, false}, {0, 0},
-	{{0.0f,0.0f}, {0.0f, 0.0f}, {0.0f, 0.0f}}, {0.0f, 0.0f}
+	{{0.0f,0.0f}, {0.0f, 0.0f}, {0.0f, 0.0f}}, {0.0f, 0.0f}, {0.0f, 0.0f}
 };
 SDL_Event EventHandler::event;
 bool EventHandler::close = false;
@@ -24,6 +24,8 @@ void EventHandler::update(){
 	mouse.click[Game::Event::RIGHT] = false;
 	mouse.scroll[Game::Event::X] = 0;
 	mouse.scroll[Game::Event::Y] = 0;
+	mouse.last_cycle_position[Game::Event::X] = mouse.this_cycle_position[Game::Event::X];
+	mouse.last_cycle_position[Game::Event::Y] = mouse.this_cycle_position[Game::Event::Y];
 	
 	if(SDL_PollEvent(&event)){
 		switch(event.type){
@@ -31,8 +33,8 @@ void EventHandler::update(){
 				close = true;
 				break;
 			case SDL_MOUSEMOTION:
-				mouse.current_position[Game::Event::X] = event.motion.x;
-				mouse.current_position[Game::Event::Y] = event.motion.y;
+				mouse.this_cycle_position[Game::Event::X] = event.motion.x;
+				mouse.this_cycle_position[Game::Event::Y] = event.motion.y;
 				break;
 			case SDL_MOUSEBUTTONDOWN:
 				if(!mouse.press[event.button.button-1]){
@@ -72,8 +74,12 @@ float EventHandler::getClickPosition(int button, int axis){
 	return mouse.click_position[button][axis];
 }
 
-float EventHandler::getCurrentPosition(int button){
-	return mouse.current_position[button];
+float EventHandler::getThisCyclePosition(int button){
+	return mouse.this_cycle_position[button];
+}
+
+float EventHandler::getLastCyclePosition(int button){
+	return mouse.last_cycle_position[button];
 }
 
 bool EventHandler::closeWindow(){

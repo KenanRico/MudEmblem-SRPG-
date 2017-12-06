@@ -2,6 +2,7 @@
 #include "game.h"
 #include "eventhandler.h"
 #include "entities.h"
+#include "cursor.h"
 
 #include <stdexcept>
 #include <iostream>
@@ -57,11 +58,14 @@ void InitSystem(){
 	}else{
 		throw std::runtime_error("Failed to init SDL");
 	}
+	//hide default cursor
+	SDL_ShowCursor(0);
 }
 
 void InitGame(){
 	GameSystem::init();
 	EventHandler::init();
+	Cursor::init(renderer);
 	entities = new Entities(renderer);
 	entities->addMap(renderer, "maps/map1/map1.tmx");
 }
@@ -76,6 +80,7 @@ void GameLoop(){
 void updateGame(){
 	GameSystem::update(window);
 	EventHandler::update();
+	Cursor::update();
 	entities->update();
 }
 
@@ -83,12 +88,13 @@ void renderGame(){
 	SDL_RenderClear(renderer);
 
 	entities->render(renderer);
+	Cursor::render(renderer);
 
 	SDL_RenderPresent(renderer);
 }
 
 void DestroyGame(){
-	//nothing yet
+	Cursor::destroy();
 }
 
 void DestroySystem(){

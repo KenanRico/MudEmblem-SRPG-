@@ -1,11 +1,11 @@
 # depslib dependency file v1.0
-1512268410 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\eventhandler.cpp
+1512525467 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\eventhandler.cpp
 	"eventhandler.h"
 	"game.h"
 	<iostream>
 	<SDL2/SDL.h>
 
-1512268305 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\eventhandler.h
+1512525165 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\eventhandler.h
 	<SDL2/SDL.h>
 
 1476881990 d:\coding\libs\sdl2_vc\include\sdl2\sdl.h
@@ -338,27 +338,29 @@
 1511748580 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\gamesystem.h
 	<SDL2/SDL.h>
 
-1512266101 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\main.cpp
+1512528432 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\main.cpp
 	"gamesystem.h"
 	"game.h"
 	"eventhandler.h"
 	"entities.h"
+	"cursor.h"
 	<stdexcept>
 	<iostream>
 	<SDL2/SDL.h>
 
-1512268585 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\map.h
+1512521206 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\map.h
+	"camera.h"
 	<vector>
 	<string>
 	<SDL2/SDL.h>
 
-1512264055 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\map.cpp
+1512521222 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\map.cpp
 	"map.h"
-	"renderengine.h"
 	"xmlparse.h"
 	"gamesystem.h"
 	"eventhandler.h"
 	"game.h"
+	"camera.h"
 	<vector>
 	<cstring>
 	<stdexcept>
@@ -404,13 +406,32 @@
 	<vector>
 	<SDL2/SDL.h>
 
-1512268550 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\entities.cpp
+1512527439 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\entities.cpp
 	"entities.h"
 	"map.h"
 	"eventhandler.h"
 	"game.h"
 	<vector>
 	<iostream>
+	<stdexcept>
+	<SDL2/SDL.h>
+	<SDL2/extensions/SDL_image.h>
+
+1512525381 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\camera.h
+
+1512525663 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\camera.cpp
+	"camera.h"
+	"eventhandler.h"
+	"gamesystem.h"
+	"game.h"
+
+1512528084 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\cursor.h
+	<SDL2/SDL.h>
+
+1512528555 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\cursor.cpp
+	"cursor.h"
+	"eventhandler.h"
+	"game.h"
 	<stdexcept>
 	<SDL2/SDL.h>
 	<SDL2/extensions/SDL_image.h>
