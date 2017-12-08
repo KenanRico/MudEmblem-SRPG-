@@ -35,6 +35,9 @@ class Map{
 		};
 
 	private:
+		//render rectangles
+		SDL_Rect src;
+		SDL_Rect dest;
 		//tiles related attributes/data
 		Tilemap tilemap;
 		std::vector<Tileset> tilesets; 

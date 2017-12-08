@@ -6,6 +6,7 @@
 
 #include <stdexcept>
 #include <iostream>
+#include <windows.h>
 
 #include <SDL2/SDL.h>
 
@@ -70,6 +71,7 @@ void InitGame(){
 	Cursor::init(renderer);
 	entities = new Entities(renderer);
 	entities->addMap(renderer, "maps/map1/map1.tmx");
+	entities->addMap(renderer, "maps/map2/map2.tmx");
 }
 
 void GameLoop(){

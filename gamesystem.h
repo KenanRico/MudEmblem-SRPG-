@@ -9,7 +9,6 @@ class GameSystem{
 		static int start_time;
 		static int window_width;
 		static int window_height;
-		static int checker_board_size;
 	private:
 		GameSystem() = delete;
 		GameSystem(const GameSystem&) = delete;
@@ -25,7 +24,6 @@ class GameSystem{
 		static float floatingY(float);
 		static int integerX(float);
 		static int integerY(float);
-		static int checkerBoardSize();
 };
 
 #endif

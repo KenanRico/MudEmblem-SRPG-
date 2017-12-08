@@ -17,6 +17,7 @@
 
 
 Map::Map(SDL_Renderer* renderer, const char* tilemap_src): 
+src((SDL_Rect){0,0,0,0}), dest((SDL_Rect){0,0,0,0}),
 tilemap((struct Tilemap){0, 0, 0.0f, 0.0f}), 
 camera(0.2f, 0.4f, 0.4f, 0.6f){
 	///parse tilemap into tilesets and mapping

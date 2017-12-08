@@ -24,7 +24,7 @@ class Entities{
 	private:
 		//map related members
 		std::vector<Map*> maps;
-		std::vector<Map*>::iterator current_map;
+		Map* current_map;
 		//grid selection related members
 		bool selecting_grid;
 		SDL_Rect grid_src;

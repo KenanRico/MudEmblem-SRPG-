@@ -10,7 +10,6 @@ int GameSystem::state = Game::State::END;
 int GameSystem::start_time = 0;
 int GameSystem::window_width = 800;
 int GameSystem::window_height = 600;
-int GameSystem::checker_board_size = 8;
 
 void GameSystem::init(){
 	state = Game::State::RUN;
@@ -30,8 +29,8 @@ void GameSystem::update(SDL_Window* window){
 
 	//limit FPS by forcing each render cycle to last 1000/60 miliseconds
 	int delta_time = SDL_GetTicks() - start_time;
-	if(delta_time < 1000.0f/60.0f){
-		SDL_Delay((int)(1000.0/60.0f)-delta_time);
+	if(delta_time < 1000.0f/90.0f){
+		SDL_Delay((int)(1000.0/90.0f)-delta_time);
 	}else;
 	start_time = SDL_GetTicks();
 }
@@ -62,8 +61,4 @@ int GameSystem::integerX(float pos){
 
 int GameSystem::integerY(float pos){
 	return pos * (float)window_height;
-}
-
-int GameSystem::checkerBoardSize(){
-	return checker_board_size;
 }
