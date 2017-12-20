@@ -1,6 +1,10 @@
 #include "map.h"
+#include "gridbox.h"
+#include "level.h"
 
 #include <vector>
+#include <map>
+#include <string>
 
 #include <SDL2/SDL.h>
 
@@ -20,16 +24,18 @@ class Entities{
 		std::map<unsigned int, struct Level> levels;
 		std::map<unsigned int, struct Level>::iterator current_level;
 	*/
-
 	private:
 		//map related members
+		std::vector<Level*> levels;
+		Level* current_level;
+		/*
 		std::vector<Map*> maps;
 		Map* current_map;
-		//grid selection related members
-		bool selecting_grid;
-		SDL_Rect grid_src;
-		SDL_Rect grid_box;
-		SDL_Texture* grid_texture;
+		*/
+		//grid box
+		GridBox gridbox;
+		//sprites
+		std::vector<Sprite*> sprites;
 
 	public:
 		Entities(SDL_Renderer*);
@@ -42,7 +48,7 @@ class Entities{
 	public:
 		void addMap(SDL_Renderer*, const char*);
 		void update();
-		void render(SDL_Renderer*) const;
+		void render() const;
 };
 
 #endif

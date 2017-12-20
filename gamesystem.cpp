@@ -47,18 +47,18 @@ int GameSystem::windowH(){
 	return window_height;
 }
 
-float GameSystem::floatingX(float pos){
+float GameSystem::normalizedX(float pos){
 	return (float)pos/(float)window_width;
 }
 
-float GameSystem::floatingY(float pos){
+float GameSystem::normalizedY(float pos){
 	return (float)pos/(float)window_height;
 }
 
-int GameSystem::integerX(float pos){
+int GameSystem::physicalX(float pos){
 	return pos * (float)window_width;
 }
 
-int GameSystem::integerY(float pos){
+int GameSystem::physicalY(float pos){
 	return pos * (float)window_height;
 }

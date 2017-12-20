@@ -12,8 +12,8 @@
 class Map{
 	public:
 		struct Tilemap{
-			int width;
-			int height;
+			int width; // #columns
+			int height; // #rows
 			float tile_width;
 			float tile_height;
 		};
@@ -27,11 +27,15 @@ class Map{
 			int height;
 			SDL_Texture* texture;
 		};
-		
 		struct Grid{
 			int row_index;
 			int column_index;
 			SDL_Rect rectangle;
+		};
+		struct ObjectLayer{
+			int** objects;
+			int width;
+			int height;
 		};
 
 	private:
@@ -39,9 +43,11 @@ class Map{
 		SDL_Rect src;
 		SDL_Rect dest;
 		//tiles related attributes/data
-		Tilemap tilemap;
-		std::vector<Tileset> tilesets; 
+		struct Tilemap tilemap;
+		std::vector<struct Tileset> tilesets; 
 		std::vector<int**> mapping;
+		//object layer
+		struct ObjectLayer object_layer;
 		//camera
 		Camera camera;
 		//individual grids
@@ -57,11 +63,14 @@ class Map{
 
 	public:
 		void update();
-		void render(SDL_Renderer*) const;
+		void render() const;
 		const std::vector<struct Grid>& getRenderedGrids() const;
+		void getGridDimension(int*, int*) const;
+		const struct Camera::Position& getCameraInfo() const;
+		const struct ObjectLayer& getObjectLayer() const;
 	private:
 		bool isInFrame(int, int) const;
-		void drawGrid(SDL_Renderer*, int, int, int, SDL_Rect&, SDL_Rect&) const;
+		void drawGrid(int, int, int, SDL_Rect&, SDL_Rect&, int) const;
 };
 
 #endif

@@ -13,6 +13,10 @@ namespace Game{
 			enum POSITION{ X=0, Y=1 };
 			enum BUTTON{ LEFT=0, MIDDLE=1, RIGHT=2 };
 	};
+	class Render{
+		public:
+			enum TYPE{ GROUND=0, OBJECT=1, EFFECT=2, CURSOR=3 };
+	};
 
 
 

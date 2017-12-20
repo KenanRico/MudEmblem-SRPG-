@@ -4,6 +4,7 @@
 #include "eventhandler.h"
 #include "game.h"
 #include "camera.h"
+#include "renderengine.h"
 
 #include <vector>
 #include <cstring>
@@ -19,6 +20,7 @@
 Map::Map(SDL_Renderer* renderer, const char* tilemap_src): 
 src((SDL_Rect){0,0,0,0}), dest((SDL_Rect){0,0,0,0}),
 tilemap((struct Tilemap){0, 0, 0.0f, 0.0f}), 
+object_layer((struct ObjectLayer){nullptr, 0, 0}),
 camera(0.2f, 0.4f, 0.4f, 0.6f){
 	///parse tilemap into tilesets and mapping
 	XMLParse::parseToTilemap(tilemap_src, tilemap, tilesets, mapping);
@@ -70,7 +72,7 @@ void Map::update(){
 }
 
 
-void Map::render(SDL_Renderer* renderer) const{
+void Map::render() const{
 	//clear currently-renderer grids vector
 	grids.clear();
 
@@ -86,7 +88,7 @@ void Map::render(SDL_Renderer* renderer) const{
 				for(std::vector<int**>::const_iterator grid=mapping.begin(); grid!=mapping.end(); ++grid){
 					if((*grid)[i][j]>0){
 						//draw in this grid with appropriate ID
-						drawGrid(renderer, i, j, (*grid)[i][j], src, dest);
+						drawGrid(i, j, (*grid)[i][j], src, dest, grid-mapping.begin());
 					}else;
 				}
 				//push currently-rendered grid into vector
@@ -114,7 +116,7 @@ bool Map::isInFrame(int row_num, int col_num) const{
 }
 
 
-void Map::drawGrid(SDL_Renderer* renderer, int i, int j, int tileID, SDL_Rect& src, SDL_Rect& dest) const{
+void Map::drawGrid(int i, int j, int tileID, SDL_Rect& src, SDL_Rect& dest, int layer) const{
 	//get texture && update src rectangle
 	SDL_Texture* tex = nullptr;
 	for(std::vector<struct Tileset>::const_iterator tileset=tilesets.begin(); tileset!=tilesets.end(); ++tileset){
@@ -141,15 +143,34 @@ void Map::drawGrid(SDL_Renderer* renderer, int i, int j, int tileID, SDL_Rect& s
 	const struct Camera::Position& cam = camera.getPosition();
 	float screen_pos_y = (i * tilemap.tile_height - cam.top) / cam.width;
 	float screen_pos_x = (j * tilemap.tile_width - cam.left) / cam.height;
-	dest.x = ceil(GameSystem::integerX(screen_pos_x));
-	dest.y = ceil(GameSystem::integerY(screen_pos_y));
-	dest.w = ceil((GameSystem::integerX(tilemap.tile_width)+1) / cam.width);
-	dest.h = ceil((GameSystem::integerY(tilemap.tile_height)+1) / cam.height);
+	dest.x = ceil(GameSystem::physicalX(screen_pos_x));
+	dest.y = ceil(GameSystem::physicalY(screen_pos_y));
+	dest.w = ceil((GameSystem::physicalX(tilemap.tile_width)+1) / cam.width);
+	dest.h = ceil((GameSystem::physicalY(tilemap.tile_height)+1) / cam.height);
 
 	//render
-	SDL_RenderCopy(renderer, tex, &src, &dest);
+	if(layer==0){
+		//go into ground layer
+		RenderEngine::addToRenderer(Game::Render::GROUND, tex, src, dest);
+	}else{
+		//go into object layer
+		RenderEngine::addToRenderer(Game::Render::OBJECT, tex, src, dest);
+	}
 }
 
 const std::vector<struct Map::Grid>& Map::getRenderedGrids() const{
 	return grids;
+}
+
+void Map::getGridDimension(int* w, int* h) const{
+	*w = ceil((GameSystem::physicalX(tilemap.tile_width)+1) / camera.getPosition().width);
+	*h = ceil((GameSystem::physicalY(tilemap.tile_height)+1) / camera.getPosition().height);
+}
+
+const struct Camera::Position& Map::getCameraInfo() const{
+	return camera.getPosition();
+}
+
+const struct Map::ObjectLayer& Map::getObjectLayer() const{
+	return object_layer;
 }

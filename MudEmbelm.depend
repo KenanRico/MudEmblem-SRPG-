@@ -1,11 +1,11 @@
 # depslib dependency file v1.0
-1512525467 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\eventhandler.cpp
+1512703032 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\eventhandler.cpp
 	"eventhandler.h"
 	"game.h"
 	<iostream>
 	<SDL2/SDL.h>
 
-1512525165 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\eventhandler.h
+1512703032 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\eventhandler.h
 	<SDL2/SDL.h>
 
 1476881990 d:\coding\libs\sdl2_vc\include\sdl2\sdl.h
@@ -327,40 +327,43 @@
 	"begin_code.h"
 	"close_code.h"
 
-1512268218 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\game.h
+1513056406 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\game.h
 
-1512683087 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\gamesystem.cpp
+1513321499 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\gamesystem.cpp
 	"gamesystem.h"
 	"game.h"
 	"eventhandler.h"
 	<SDL2/SDL.h>
 
-1512585470 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\gamesystem.h
+1513321477 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\gamesystem.h
 	<SDL2/SDL.h>
 
-1512682987 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\main.cpp
+1513058734 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\main.cpp
 	"gamesystem.h"
 	"game.h"
 	"eventhandler.h"
 	"entities.h"
 	"cursor.h"
+	"renderengine.h"
 	<stdexcept>
 	<iostream>
+	<windows.h>
 	<SDL2/SDL.h>
 
-1512685616 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\map.h
+1513737453 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\map.h
 	"camera.h"
 	<vector>
 	<string>
 	<SDL2/SDL.h>
 
-1512539247 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\map.cpp
+1513737767 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\map.cpp
 	"map.h"
 	"xmlparse.h"
 	"gamesystem.h"
 	"eventhandler.h"
 	"game.h"
 	"camera.h"
+	"renderengine.h"
 	<vector>
 	<cstring>
 	<stdexcept>
@@ -369,8 +372,8 @@
 	<SDL2/SDL.h>
 	<SDL2/extensions/SDL_image.h>
 
-1511752800 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\renderengine.h
-	"map.h"
+1513060301 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\renderengine.h
+	<vector>
 	<SDL2/SDL.h>
 
 1511785873 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\xmlparse.h
@@ -401,39 +404,119 @@
 	<new>
 	<exception>
 
-1512649337 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\entities.h
+1513058597 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\entities.h
 	"map.h"
+	"gridbox.h"
+	"level.h"
 	<vector>
+	<map>
+	<string>
 	<SDL2/SDL.h>
 
-1512649388 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\entities.cpp
+1513470752 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\entities.cpp
 	"entities.h"
 	"map.h"
 	"eventhandler.h"
 	"game.h"
+	"gridbox.h"
+	"level.h"
 	<vector>
 	<iostream>
 	<stdexcept>
 	<SDL2/SDL.h>
-	<SDL2/extensions/SDL_image.h>
 
 1512539028 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\camera.h
 
-1512588867 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\camera.cpp
+1513321576 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\camera.cpp
 	"camera.h"
 	"eventhandler.h"
 	"gamesystem.h"
 	"game.h"
 	<iostream>
 
-1512528084 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\cursor.h
+1513058702 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\cursor.h
 	<SDL2/SDL.h>
 
-1512528555 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\cursor.cpp
+1513325642 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\cursor.cpp
 	"cursor.h"
 	"eventhandler.h"
 	"game.h"
+	"renderengine.h"
+	"gamesystem.h"
 	<stdexcept>
 	<SDL2/SDL.h>
 	<SDL2/extensions/SDL_image.h>
+
+1513470606 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\gridbox.h
+	"map.h"
+	<SDL2/SDL.h>
+
+1513470645 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\gridbox.cpp
+	"gridbox.h"
+	"map.h"
+	"eventhandler.h"
+	"game.h"
+	"renderengine.h"
+	<stdexcept>
+	<SDL2/SDL.h>
+	<SDL2/extensions/SDL_image.h>
+
+1513470797 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\level.h
+	"map.h"
+	"sprite.h"
+	"gridbox.h"
+	<map>
+	<string>
+	<vector>
+	<SDL2/SDL.h>
+
+1513736703 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\sprite.h
+	"map.h"
+	"gridbox.h"
+	<SDL2/SDL.h>
+
+1513737709 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\character.cpp
+	"character.h"
+	"map.h"
+	"camera.h"
+	"gamesystem.h"
+	"renderengine.h"
+	"game.h"
+	"eventhandler.h"
+	"gridbox.h"
+	<math.h>
+	<iostream>
+	<SDL2/SDL.h>
+
+1513737647 d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\character.h
+	"sprite.h"
+	"map.h"
+	"gridbox.h"
+	<SDL2/SDL.h>
+
+1513470826 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\level.cpp
+	"level.h"
+	"map.h"
+	"sprite.h"
+	"character.h"
+	"gridbox.h"
+	<map>
+	<SDL2/SDL.h>
+
+1513736732 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\sprite.cpp
+	"sprite.h"
+	"map.h"
+	"camera.h"
+	"gamesystem.h"
+	<stdexcept>
+	<SDL2/SDL.h>
+	<SDL2/extensions/SDL_image.h>
+
+1513060540 source:d:\codeblocks\pppppppppppppprojectssssssssssssss\mudembelm\renderengine.cpp
+	"renderengine.h"
+	"game.h"
+	<vector>
+	<iostream>
+	<algorithm>
+	<SDL2/SDL.h>
 

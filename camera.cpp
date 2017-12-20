@@ -38,8 +38,8 @@ void Camera::updateActions(float cursor_x, float cursor_y){
 
 void Camera::handleActions(struct Position& new_camera, float this_cycle_cursor_x, float this_cycle_cursor_y, float last_cycle_cursor_x, float last_cycle_cursor_y){
 	if(action.drag){
-		float camera_offset_x = GameSystem::floatingX(this_cycle_cursor_x-last_cycle_cursor_x) * current.width;
-		float camera_offset_y = GameSystem::floatingY(this_cycle_cursor_y-last_cycle_cursor_y) * current.height;
+		float camera_offset_x = GameSystem::normalizedX(this_cycle_cursor_x-last_cycle_cursor_x) * current.width;
+		float camera_offset_y = GameSystem::normalizedY(this_cycle_cursor_y-last_cycle_cursor_y) * current.height;
 		new_camera.left -= camera_offset_x;
 		new_camera.right -= camera_offset_x;
 		new_camera.top -= camera_offset_y;

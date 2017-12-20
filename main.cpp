@@ -3,6 +3,7 @@
 #include "eventhandler.h"
 #include "entities.h"
 #include "cursor.h"
+#include "renderengine.h"
 
 #include <stdexcept>
 #include <iostream>
@@ -91,8 +92,12 @@ void updateGame(){
 void renderGame(){
 	SDL_RenderClear(renderer);
 
-	entities->render(renderer);
-	Cursor::render(renderer);
+	//add all render objects to renderengine (order do matter)
+	entities->render();
+	Cursor::render();
+
+	//actually render all objects
+	RenderEngine::renderAll(renderer);
 
 	SDL_RenderPresent(renderer);
 }

@@ -42,6 +42,8 @@
 		</Compiler>
 		<Unit filename="camera.cpp" />
 		<Unit filename="camera.h" />
+		<Unit filename="character.cpp" />
+		<Unit filename="character.h" />
 		<Unit filename="cursor.cpp" />
 		<Unit filename="cursor.h" />
 		<Unit filename="entities.cpp" />
@@ -51,9 +53,17 @@
 		<Unit filename="game.h" />
 		<Unit filename="gamesystem.cpp" />
 		<Unit filename="gamesystem.h" />
+		<Unit filename="gridbox.cpp" />
+		<Unit filename="gridbox.h" />
+		<Unit filename="level.cpp" />
+		<Unit filename="level.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="map.cpp" />
 		<Unit filename="map.h" />
+		<Unit filename="renderengine.cpp" />
+		<Unit filename="renderengine.h" />
+		<Unit filename="sprite.cpp" />
+		<Unit filename="sprite.h" />
 		<Unit filename="xmlparse.cpp" />
 		<Unit filename="xmlparse.h" />
 		<Extensions>

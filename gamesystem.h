@@ -20,10 +20,10 @@ class GameSystem{
 		static bool isState(int);
 		static int windowW();
 		static int windowH();
-		static float floatingX(float);
-		static float floatingY(float);
-		static int integerX(float);
-		static int integerY(float);
+		static float normalizedX(float);
+		static float normalizedY(float);
+		static int physicalX(float);
+		static int physicalY(float);
 };
 
 #endif

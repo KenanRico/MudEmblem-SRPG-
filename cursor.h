@@ -29,7 +29,7 @@ class Cursor{
 	public:
 		static void init(SDL_Renderer*);
 		static void update();
-		static void render(SDL_Renderer*);
+		static void render();
 		static void destroy();
 };
 

@@ -1,6 +1,8 @@
 #include "cursor.h"
 #include "eventhandler.h"
 #include "game.h"
+#include "renderengine.h"
+#include "gamesystem.h"
 
 #include <stdexcept>
 
@@ -13,6 +15,10 @@ SDL_Rect Cursor::dest_rect = (SDL_Rect){0, 0, Cursor::size.width, Cursor::size.h
 
 
 void Cursor::init(SDL_Renderer* renderer){
+	///place cursor at center
+	dest_rect.x = (int)GameSystem::physicalX(0.5f);
+	dest_rect.y = (int)GameSystem::physicalY(0.5f);
+
 	///load cursor image for "normal"
 	SDL_Surface* temp = IMG_Load("cursor/sword.png");
 	if(temp!=nullptr){
@@ -35,8 +41,9 @@ void Cursor::update(){
 	dest_rect.y = (int)(cursor_y);
 }
 
-void Cursor::render(SDL_Renderer* renderer){
-	SDL_RenderCopy(renderer, normal.texture, &(normal.rect), &(dest_rect));
+void Cursor::render(){
+	//SDL_RenderCopy(renderer, normal.texture, &(normal.rect), &(dest_rect));
+	RenderEngine::addToRenderer(Game::Render::CURSOR, normal.texture, normal.rect, dest_rect);
 }
 
 void Cursor::destroy(){
